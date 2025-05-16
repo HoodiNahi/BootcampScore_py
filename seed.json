@@ -1,0 +1,160 @@
+{
+  "Baruch.J": {
+    "2025-05-11": [
+      {
+        "pass": 1,
+        "target": "EK26-Container-1",
+        "distance": 6.45,
+        "radial": 240,
+        "quality": "EXCELLENT",
+        "weapon": "Mk_82",
+        "airframe": "F-16C_50",
+        "mission_time": "15:53:56"
+      },
+      {
+        "pass": 2,
+        "target": "EK26-Leopard-1",
+        "distance": 27.85,
+        "radial": 346,
+        "quality": "INEFFECTIVE",
+        "weapon": "Mk_82",
+        "airframe": "F-16C_50",
+        "mission_time": "15:55:41"
+      }
+    ],
+    "2025-05-10": [
+      {
+        "pass": 1,
+        "target": "AmmoDump-3",
+        "distance": 4.31,
+        "radial": 290,
+        "quality": "GOOD",
+        "weapon": "GBU-12",
+        "airframe": "F-16C_50",
+        "mission_time": "12:18:34"
+      },
+      {
+        "pass": 2,
+        "target": "Radar-Van",
+        "distance": 5.76,
+        "radial": 85,
+        "quality": "EXCELLENT",
+        "weapon": "AGM-65D",
+        "airframe": "F-16C_50",
+        "mission_time": "12:21:47"
+      }
+    ]
+  },
+  "Viper.1": {
+    "2025-05-11": [
+      {
+        "pass": 1,
+        "target": "Target-Depot",
+        "distance": 3.92,
+        "radial": 78,
+        "quality": "EXCELLENT",
+        "weapon": "GBU-38",
+        "airframe": "F/A-18C",
+        "mission_time": "14:22:31"
+      },
+      {
+        "pass": 2,
+        "target": "Convoy-Alpha",
+        "distance": 11.45,
+        "radial": 121,
+        "quality": "GOOD",
+        "weapon": "Mk_83",
+        "airframe": "F/A-18C",
+        "mission_time": "14:25:17"
+      }
+    ],
+    "2025-05-09": [
+      {
+        "pass": 1,
+        "target": "Warehouse-12",
+        "distance": 6.77,
+        "radial": 172,
+        "quality": "INEFFECTIVE",
+        "weapon": "Mk_82",
+        "airframe": "F/A-18C",
+        "mission_time": "09:11:06"
+      },
+      {
+        "pass": 2,
+        "target": "SAM-Site-Delta",
+        "distance": 4.89,
+        "radial": 230,
+        "quality": "EXCELLENT",
+        "weapon": "AGM-88",
+        "airframe": "F/A-18C",
+        "mission_time": "09:13:58"
+      },
+      {
+        "pass": 3,
+        "target": "HQ-Tent",
+        "distance": 5.20,
+        "radial": 62,
+        "quality": "GOOD",
+        "weapon": "Mk_83",
+        "airframe": "F/A-18C",
+        "mission_time": "09:17:12"
+      }
+    ]
+  },
+  "Strike.Eagle": {
+    "2025-05-11": [
+      {
+        "pass": 1,
+        "target": "PowerStation-3",
+        "distance": 2.76,
+        "radial": 305,
+        "quality": "EXCELLENT",
+        "weapon": "GBU-31",
+        "airframe": "F-15ESE",
+        "mission_time": "13:11:50"
+      },
+      {
+        "pass": 2,
+        "target": "Bridge-Node-A",
+        "distance": 6.82,
+        "radial": 33,
+        "quality": "GOOD",
+        "weapon": "Mk_84",
+        "airframe": "F-15ESE",
+        "mission_time": "13:16:03"
+      }
+    ],
+    "2025-05-08": [
+      {
+        "pass": 1,
+        "target": "FuelDepot-Zulu",
+        "distance": 3.44,
+        "radial": 144,
+        "quality": "EXCELLENT",
+        "weapon": "GBU-31",
+        "airframe": "F-15ESE",
+        "mission_time": "08:48:22"
+      },
+      {
+        "pass": 2,
+        "target": "Artillery-Battery",
+        "distance": 6.91,
+        "radial": 199,
+        "quality": "GOOD",
+        "weapon": "Mk_84",
+        "airframe": "F-15ESE",
+        "mission_time": "08:53:01"
+      },
+      {
+        "pass": 3,
+        "target": "Enemy-Hangar",
+        "distance": 9.12,
+        "radial": 283,
+        "quality": "INEFFECTIVE",
+        "weapon": "GBU-12",
+        "airframe": "F-15ESE",
+        "mission_time": "08:58:19"
+      }
+    ]
+  }
+}
