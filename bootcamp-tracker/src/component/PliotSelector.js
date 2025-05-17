@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchPilots, fetchDatesForPilot } from '../api';
+import { fetchPilots } from '../api';
 
 function PilotSelector({ onSelect }) {
   const [pilots, setPilots] = useState([]);

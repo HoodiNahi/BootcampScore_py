@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 import './index.css';
 import PilotSelector from './component/PliotSelector';
-import { fetchDatesForPilot, fetchPasses } from './api';
+import { fetchPasses, fetchWeaponsForPilot} from './api';
 import PassesTable from "./component/passesTable";
 
 function App() {
@@ -14,13 +14,13 @@ function App() {
 
   const handlePilotSelect = async (pilot) => {
     setSelectedPilot(pilot);
-    const res = await fetchDatesForPilot(pilot);
+    const res = await fetchWeaponsForPilot(pilot);
     setDates(res?.data || []);
     setPasses([]);
   };
 
-  const handleDateClick = async (pilot, date) => {
-    const res = await fetchPasses(pilot, date);
+  const handleDateClick = async (pilot, weapon) => {
+    const res = await fetchPasses(pilot, weapon);
     setPasses(res?.length > 0 ? res : []);
   };
 
@@ -84,7 +84,7 @@ function App() {
 
       <hr className="my-4" />
 
-      <h2 className="text-xl font-semibold mb-2">Available Dates</h2>
+      <h2 className="text-xl font-semibold mb-2">Weapons Used</h2>
       <ul className="mb-6">
         {dates.map((d) => (
           <li
