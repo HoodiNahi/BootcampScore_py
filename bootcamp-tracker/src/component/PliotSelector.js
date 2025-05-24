@@ -1,31 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { fetchPilots } from '../api';
+import React, { useState, useEffect } from 'react';
+import { fetchPilots } from '../api'; // whatever your data source is
 
-function PilotSelector({ onSelect }) {
+export default function PilotSelector({ onSelect }) {
   const [pilots, setPilots] = useState([]);
-  const [selected, setSelected] = useState('');
+  const [value, setValue] = useState('');
 
   useEffect(() => {
-    fetchPilots().then((res) => setPilots(res.data));
+    async function load() {
+      const res = await fetchPilots();
+      setPilots(res.data || []);
+    }
+    load();
   }, []);
 
-  const handleSelect = (e) => {
-    const name = e.target.value;
-    setSelected(name);
-    onSelect(name);
+  const handleChange = e => {
+    setValue(e.target.value);
+    onSelect(e.target.value);
   };
 
   return (
-    <div>
-      <h3>Select Pilot</h3>
-      <select onChange={handleSelect} value={selected}>
-        <option value="">-- Select --</option>
-        {pilots.map((p) => (
-          <option key={p} value={p}>{p}</option>
+    <div className="pilot-dropdown">
+      <select value={value} onChange={handleChange}>
+        <option value="" disabled>
+          Select a Pilot…
+        </option>
+        {pilots.map(p => (
+          <option key={p} value={p}>
+            {p}
+          </option>
         ))}
       </select>
     </div>
   );
 }
-
-export default PilotSelector;

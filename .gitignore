@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+venv/
+*.py[cod]
+
+# Database
+data.db
+
+# Node
+bootcamp-tracker/node_modules/
+bootcamp-tracker/package-lock.json
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.iml

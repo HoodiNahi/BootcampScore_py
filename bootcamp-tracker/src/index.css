@@ -1,18 +1,182 @@
 /* index.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-body {
+/* ─── Theme Colors ────────────────────────────────────────────────────────── */
+:root {
+    --bg:         #1e1e2e;
+    --card-bg:    #252532;
+    --text:       #e4e4e7;
+    --text-light: #a1a1aa;
+    --border:     #37374c;
+    --primary:    #5a79ff;
+    --primary-d:  #3e50be;
+    --secondary:  #6ad29d;
+  }
+
+/* ─── Global Resets ───────────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* ─── Layout Containers ───────────────────────────────────────────────────── */
+.app-container {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.section {
+  margin-bottom: 40px;
+}
+
+/* ─── Headers ──────────────────────────────────────────────────────────────── */
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 2.5rem;
+  color: var(--primary-d);
+}
+
+.section-title {
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 12px;
+  border-bottom: 2px solid var(--primary);
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+/* ─── Pilot & Weapon Buttons ───────────────────────────────────────────────── */
+.button-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.button-list li {
+  flex: 1 1 auto;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: var(--primary);
+  color: #fff;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color .25s;
+  user-select: none;
+}
+
+.btn:hover {
+  background-color: var(--primary-d);
+}
+
+/* Pilot dropdown wrapper */
+.pilot-dropdown {
+  max-width: 300px;
+  margin-bottom: 1.5rem;
+}
+
+/* The <select> itself */
+.pilot-dropdown select {
+  width: 100%;
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  font-size: 1rem;
+  color: var(--text);
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  appearance: none;
+  background-image:
+    url("data:image/svg+xml;charset=UTF-8,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236B7280'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 10px 6px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+/* Hover and focus states */
+.pilot-dropdown select:hover {
+  border-color: var(--primary);
+}
+
+.pilot-dropdown select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(90, 121, 255, 0.3);
+}
+
+/* Disabled state (if you ever disable it) */
+.pilot-dropdown select:disabled {
+  background-color: #f9fafb;
+  cursor: not-allowed;
+  color: #9ca3af;
+}
+
+/* ─── Data Table ───────────────────────────────────────────────────────────── */
+.table-container {
+  overflow-x: auto;
+  background: var(--card-bg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border-radius: 6px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+
+.table th {
+  background-color: var(--border);
+  font-weight: bold;
+}
+
+/*.table tr:nth-child(even) {*/
+/*  background-color: #fafafa;*/
+/*}*/
+
+/* ─── Bullseye Chart Container ─────────────────────────────────────────────── */
+/*.chart-container {*/
+/*  position: relative;*/
+/*  width: 700px;*/
+/*  height: 600px;*/
+/*  margin: 0 auto;*/
+/*  background:*/
+/*    radial-gradient(circle, transparent 70%, var(--border) 71% 72%, transparent 73%),*/
+/*    radial-gradient(circle, transparent 50%, var(--border) 51% 52%, transparent 53%),*/
+/*    radial-gradient(circle, transparent 30%, var(--border) 31% 32%, transparent 33%),*/
+/*    radial-gradient(circle, transparent 10%, var(--border) 11% 12%, transparent 13%);*/
+/*  background-size: 100% 100%;*/
+/*  background-position: center;*/
+/*  border-radius: 6px;*/
+/*  box-shadow: 0 2px 8px rgba(0,0,0,0.1);*/
+/*}*/
+
+.chart-container .recharts-wrapper {
+  position: absolute !important;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
