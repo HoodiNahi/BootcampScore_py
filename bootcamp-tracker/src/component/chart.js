@@ -90,7 +90,7 @@ export default function Bullseye({ passes }) {
             formatter={(val, name, props) => {
               const p = props.payload;
               return [
-                `#${p.pass_number} – ${p.target}`,
+                `#${p.pass_attempt} – ${p.target_name}`,
                 `Dist: ${p.distance}m @ ${p.radial}°`
               ];
             }}

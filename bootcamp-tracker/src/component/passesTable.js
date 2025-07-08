@@ -23,9 +23,9 @@ const PassesTable = ({ passes }) => {
           {passes.map((pass, index) => (
             <tr key={pass.id} className="border-t border-gray-100 hover:bg-gray-50">
               <td className="px-4 py-2">{index + 1}</td>
-              <td className="px-4 py-2">{pass.pass_number}</td>
+              <td className="px-4 py-2">{pass.pass_attempt}</td>
               <td className="px-4 py-2">{pass.weapon}</td>
-              <td className="px-4 py-2">{pass.target}</td>
+              <td className="px-4 py-2">{pass.player_target}</td>
                 <td className="px-4 py-2">{pass.distance}</td>
                 <td className="px-4 py-2">{pass.radial}</td>
                 <td className="px-4 py-2">{pass.quality}</td>

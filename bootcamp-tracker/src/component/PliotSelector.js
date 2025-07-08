@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchPilots } from '../api'; // whatever your data source is
+import { fetchPilots } from '../api';
 
 export default function PilotSelector({ onSelect }) {
   const [pilots, setPilots] = useState([]);

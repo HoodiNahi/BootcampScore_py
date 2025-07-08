@@ -3,27 +3,64 @@ import React, { useEffect, useRef, useState } from 'react';
 //import 'chartjs-chart-polar-scatter';
 import './index.css';
 import PilotSelector from './component/PliotSelector';
+import MissionTypeSelector from './component/MissionTypeSelector';
 import Bullseye from './component/chart'
-import { fetchPasses, fetchWeaponsForPilot} from './api';
+import { fetchPasses, fetchWeaponsForPilot, fetchMissionTypeForPilot} from './api';
 //import PassesTable from "./component/passesTable";
 
 function App() {
-  const [dates, setDates] = useState([]);
+  const [weapons, setWeapons] = useState([]);
   const [passes, setPasses] = useState([]);
+  const [missionType, setMissionType] = useState([]);
+  const [selectedMissionType, setSelectedMissionType] = useState(null);
   const [selectedPilot, setSelectedPilot] = useState(null);
-  const chartRef = useRef(null);
-  const chartInstance = useRef(null);
+  //const chartRef = useRef(null);
+  //const chartInstance = useRef(null);
+  const [sortAsc, setSortAsc] = useState(true);
 
+
+//Sort distance in Pass table
+const handleSortByDistance = () => {
+  const sorted = [...passes].sort((a, b) => {
+    const distA = parseFloat(a.distance);
+    const distB = parseFloat(b.distance);
+    return sortAsc ? distA - distB : distB - distA;
+  });
+  setPasses(sorted);
+  setSortAsc(!sortAsc);
+};
+
+//Handle pilot click
   const handlePilotSelect = async (pilot) => {
     setSelectedPilot(pilot);
-    const res = await fetchWeaponsForPilot(pilot);
-    setDates(res?.data || []);
+    setSelectedMissionType(''); //  Reset the selected mission type
+    setWeapons([]);             //  Reset weapons
+     setPasses([]);              //  Reset passes
+    const res = await fetchMissionTypeForPilot(pilot,selectedMissionType);
+    console.log('Fetched mission types:', res);
+    setMissionType(res || []);
     setPasses([]);
   };
 
-  const handleDateClick = async (pilot, weapon) => {
+  useEffect(() => {
+  console.log('missionType updated:', missionType);
+}, [missionType]);
+
+//Handle missionType click
+  const handleMissionTypeSelect = async (missionType) => {
+      setSelectedMissionType(missionType);
+      if (selectedPilot && missionType) {
+        const res = await fetchWeaponsForPilot(selectedPilot,missionType);
+        console.log('Fetched weapons-App.js:', res);
+        setWeapons(res || []);
+        setPasses([]);//clear previous passes
+      }
+};
+
+  //Handle weapon click
+  const handleWeaponClick = async (pilot, missionType, weapon) => {
   try {
-    const res = await fetchPasses(pilot, weapon);
+    const res = await fetchPasses(pilot,missionType, weapon);
 
     const passesArray = Array.isArray(res) ? res : res.data;
     setPasses(passesArray || []);
@@ -33,59 +70,6 @@ function App() {
   }
 };
 
-//  const getColorByQuality = (quality) => {
-//  switch (quality.toUpperCase()) {
-//    case 'EXCELLENT':
-//      return '#0984e3'; // green
-//    case 'GOOD':
-//      return '#00b894'; // yellow
-//    case 'INEFFECTIVE':
-//      return '#ffb400'; // red
-//    case 'POOR':
-//      return '#ff4d4f'
-//    default:
-//      return '#94a3b8'; // slate/gray for unknown
-//  }
-//};
-
-
-//  useEffect(() => {
-//  if (!passes.length) return;
-//
-//  // build [{ r: distance, t: radial }, ...]
-//  const dataPoints = passes.map(p => ({
-//    r: p.distance || 0,
-//    t: p.radial   // Chart.js expects degrees here
-//  }));
-//
-//  const dataset = {
-//    label: 'Passes',
-//    data: dataPoints,
-//    backgroundColor: passes.map(p => getColorByQuality(p.quality)),
-//  };
-//
-// if (chartInstance.current) {
-//     chartInstance.current.destroy();
-//   }
-//  chartInstance.current = new Chart(chartRef.current, {
-//    type: 'polarScatter',      // <-- special type
-//    data: { datasets: [dataset] },
-//    options: {
-//      responsive: true,
-//      scales: {
-//        r: {
-//          beginAtZero: true,
-//          // optionals:
-//          angleLines: { display: true },
-//          suggestedMax: Math.max(...dataPoints.map(d => d.r)) * 1.1
-//        }
-//      },
-//      plugins: {
-//        legend: { position: 'bottom' }
-//      }
-//    }
-//  });
-//}, [passes]);
 
   return (
   <div className="app-container">
@@ -98,14 +82,22 @@ function App() {
       <PilotSelector onSelect={handlePilotSelect} />
     </section>
 
+   <section className="section">
+      <h2 className="section-title">Select Mission Type</h2>
+      <MissionTypeSelector
+          pilot={selectedPilot}
+          onSelect={handleMissionTypeSelect}
+        />
+    </section>
+
     <section className="section">
       <h2 className="section-title">Weapons Used</h2>
       <ul className="button-list">
-        {dates.map(d => (
+        {weapons.map(d => (
           <li key={d}>
             <div
               className="btn"
-              onClick={() => handleDateClick(selectedPilot, d)}
+              onClick={() => handleWeaponClick(selectedPilot,selectedMissionType, d)}
             >
               {d}
             </div>
@@ -123,7 +115,9 @@ function App() {
               <th>#</th>
               <th>Target</th>
               <th>Weapon</th>
-              <th>Distance (m)</th>
+              <th onClick={handleSortByDistance} style={{ cursor: 'pointer' }}>
+                Distance (m) {sortAsc ? '▲' : '▼'}
+              </th>
               <th>Radial (°)</th>
               <th>Quality</th>
             </tr>
@@ -131,8 +125,9 @@ function App() {
           <tbody>
             {passes.map((p, idx) => (
               <tr key={idx}>
-                <td>{p.pass_number}</td>
-                <td>{p.target}</td>
+
+                <td>{p.pass_attempt}</td>
+                <td>{p.target_name}</td>
                 <td>{p.weapon}</td>
                 <td>{p.distance}</td>
                 <td>{p.radial}</td>

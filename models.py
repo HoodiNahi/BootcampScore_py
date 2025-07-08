@@ -1,17 +1,22 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey
-from databse import Base
+from sqlalchemy import Column, Integer, String, Numeric, Boolean, DateTime
+from databse import Base  # your Base declarative
 
-class Pass(Base):
-    __tablename__="passes"
+class BootcampBombingRange(Base):
+    __tablename__ = "range_eval"
+    __table_args__ = {"schema": "common"}
 
-    id = Column(Integer, primary_key=True,index=True)
-    name = Column(String, index=True)
-    date = Column(String, index=True) # store date as string 'YYYY-MM-DD'
-    pass_number = Column(Integer)
-    target = Column(String)
-    distance = Column(Float)
-    radial = Column(Integer)
-    quality = Column(String)
-    weapon = Column(String)
-    airframe = Column(String)
-    mission_time = Column(String)
+    range_id = Column(Integer, primary_key=True, index=True)
+    player_name = Column(String, nullable=False)
+    pass_attempt = Column(Integer, nullable=False)  # 'pass' renamed to pass_ in Python, but maps to "pass" column
+    target_name = Column(String, nullable=False)
+    distance = Column(Numeric, nullable=False)
+    radial = Column(String, nullable=False)
+    quality = Column(String, nullable=False)
+    weapon = Column(String, nullable=False)
+    airframe = Column(String, nullable=False)
+    mission_time = Column(String, nullable=False)
+    mission_type = Column(String, nullable=False)
+    mission_date = Column(String, nullable=True)
+    created_at = Column(DateTime, nullable=True)
+
+
